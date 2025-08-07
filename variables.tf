@@ -65,3 +65,16 @@ variable "db_password" {
   default     = "password"
   sensitive   = true
 }
+
+# S3 Filestore Variables
+variable "s3_bucket_name" {
+  description = "S3 bucket name for Artifactory filestore"
+  type        = string
+  default     = "artifactory-filestore"
+}
+
+variable "s3_bucket_versioning" {
+  description = "Enable versioning for S3 bucket"
+  type        = bool
+  default     = true
+}

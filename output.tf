@@ -27,3 +27,13 @@ output "database_username" {
   description = "Database master username"
   value       = aws_db_instance.artifactory_db.username
 }
+
+output "s3_bucket_name" {
+  description = "S3 bucket name for Artifactory filestore"
+  value       = aws_s3_bucket.artifactory_filestore.bucket
+}
+
+output "s3_bucket_arn" {
+  description = "S3 bucket ARN for Artifactory filestore"
+  value       = aws_s3_bucket.artifactory_filestore.arn
+}

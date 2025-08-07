@@ -24,8 +24,8 @@ data "aws_ami" "amazon_linux_2023" {
   }
 }
 
-# User data script for Artifactory installation
 
+# User data script for Artifactory installation
 data "template_file" "user_data" {
   template = file("install-artifactory.sh")
   vars = {
@@ -34,5 +34,7 @@ data "template_file" "user_data" {
     db_name             = var.db_name
     db_username         = var.db_username
     db_password         = var.db_password
+    s3_bucket_name      = aws_s3_bucket.artifactory_filestore.bucket
+    aws_region          = var.aws_region
   }
-} 
+}
