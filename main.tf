@@ -71,7 +71,7 @@ resource "aws_route_table_association" "public_rta" {
 
 # Security Group for Artifactory
 resource "aws_security_group" "artifactory_sg" {
-  name        = "jagan-artifactory-security-group"
+  name        = "${var.additional_tags}-security-group"
   description = "Security group for JFrog Artifactory"
   vpc_id      = aws_vpc.artifactory_vpc.id
 
