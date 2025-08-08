@@ -47,6 +47,37 @@ sudo sed -i 's|#   url: "jdbc:postgresql://<your db url, for example: localhost:
 sudo sed -i 's/#   username: artifactory/        username: '${db_username}'/' /opt/jfrog/artifactory/var/etc/system.yaml
 sudo sed -i 's/#   password: password/        password: '${db_password}'/' /opt/jfrog/artifactory/var/etc/system.yaml
 
+# Configure S3 filestore in binarystore.xml
+echo "Configuring S3 filestore in binarystore.xml..."
+sudo tee /opt/jfrog/artifactory/var/etc/artifactory/binarystore.xml > /dev/null <<EOF
+<?xml version="1.0" encoding="UTF-8"?>
+<config version="2">
+    <chain>
+        <provider id="cache-fs" type="cache-fs">
+            <provider id="s3-storage-v3" type="s3-storage-v3"/>
+        </provider>
+    </chain>
+    <provider type="cache-fs" id="cache-fs">
+        <maxCacheSize>5000000000</maxCacheSize>
+    </provider>
+    <provider id="s3-storage-v3" type="s3-storage-v3">
+        <bucketName>${s3_bucket_name}</bucketName>
+        <endpoint>s3.amazonaws.com</endpoint>
+        <useInstanceCredentials>true</useInstanceCredentials>
+        <testConnection>false</testConnection>
+        <enableSignedUrlRedirect>true</enableSignedUrlRedirect>
+        <signatureExpirySeconds>300</signatureExpirySeconds>
+        <refreshCredentials>true</refreshCredentials>
+        <signedUrlExpirySeconds>30</signedUrlExpirySeconds>
+        <region>${aws_region}</region>
+        <maxConnections>200</maxConnections>
+    </provider>
+</config>
+EOF
+
+# Set proper permissions for binarystore.xml
+sudo chown artifactory:artifactory /opt/jfrog/artifactory/var/etc/artifactory/binarystore.xml
+sudo chmod 600 /opt/jfrog/artifactory/var/etc/artifactory/binarystore.xml
 
 # Enable and start Artifactory service
 echo "Enabling and starting Artifactory service..."

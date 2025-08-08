@@ -14,7 +14,7 @@ variable "additional_tags" {
 variable "instance_type" {
   description = "EC2 instance type"
   type        = string
-  default     = "t3.micro" // Change this to your required instance type
+  default     = "t3.medium" // Change this to your required instance type
 }
 
 variable "key_name" {
@@ -64,4 +64,17 @@ variable "db_password" {
   type        = string
   default     = "password"
   sensitive   = true
+}
+
+# S3 Filestore Variables
+variable "s3_bucket_name" {
+  description = "S3 bucket name for Artifactory filestore"
+  type        = string
+  default     = "artifactory-filestore"
+}
+
+variable "s3_bucket_versioning" {
+  description = "Enable versioning for S3 bucket"
+  type        = bool
+  default     = true
 }
