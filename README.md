@@ -1,11 +1,11 @@
 # Install JFrog Artifactory on AWS EC2 (Single node)
 
-
 This Terraform configuration deploys JFrog Artifactory on a single AWS EC2 instance with all necessary networking components.
 
 ## Architecture
 
 The deployment creates:
+
 - VPC with public and private subnets
 - Internet Gateway for internet access
 - Security Groups with necessary ports (22, 80, 443, 8081, 8082, 5432)
@@ -18,28 +18,32 @@ The deployment creates:
 
 1. **AWS CLI configured** with appropriate permissions
 2. **Terraform** installed (version >= 1.0)
-3. **AWS credentials** configured (via AWS CLI or environment variables)
+3. **AWS credentials** configured (update `~/.aws/credentials` file)
 
 ## Quick Start
 
 1. **Clone or download** this repository
 2. **Configure variables** :
+
    ```bash
    cp terraform.tfvars.example terraform.tfvars
    # Edit terraform.tfvars with your preferred settings
    ```
 
 3. **Initialize Terraform**:
+
    ```bash
    terraform init
    ```
 
 4. **Review the plan**:
+
    ```bash
    terraform plan
    ```
 
 5. **Deploy the infrastructure**:
+
    ```bash
    terraform apply
    ```
@@ -67,9 +71,6 @@ The deployment creates:
 | `s3_bucket_name` | S3 bucket name for filestore | `artifactory-filestore` | Yes |
 | `s3_bucket_versioning` | Enable S3 bucket versioning | `true` | No |
 
-
-
-
 ### Instance Specifications
 
 - **OS**: Amazon Linux 2023
@@ -88,11 +89,10 @@ The deployment creates:
 | 8082 | TCP | Artifactory HTTPS |
 | 5432 | TCP | PostgreSQL (RDS) |
 
-
-
 ## Management Commands
 
 ### Check Artifactory Status
+
 ```bash
 sudo systemctl status artifactory
 ```
@@ -113,6 +113,7 @@ sudo systemctl restart artifactory
 ``` -->
 
 ### Stop Artifactory
+
 ```bash
 sudo systemctl stop artifactory
 ```
@@ -120,10 +121,10 @@ sudo systemctl stop artifactory
 ## Cleanup
 
 To destroy the infrastructure:
+
 ```bash
 terraform destroy
 ```
-
 
 ## Security Considerations
 
@@ -133,14 +134,13 @@ terraform destroy
 - **Enable AWS CloudTrail** for audit logging
 - **Use AWS Secrets Manager** for sensitive data
 
-
 ## Support
 
 For JFrog Artifactory support:
+
 - [Official Documentation](https://jfrog.com/help/r/jfrog-installation-setup-documentation/install-artifactory-on-rpm)
 - [JFrog Support Portal](https://support.jfrog.com/)
 
 ## License
 
 This project is provided as-is for educational and development purposes.
-
