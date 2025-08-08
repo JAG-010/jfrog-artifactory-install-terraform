@@ -59,7 +59,6 @@ sudo tee /opt/jfrog/artifactory/var/etc/artifactory/binarystore.xml > /dev/null 
     </chain>
     <provider type="cache-fs" id="cache-fs">
         <maxCacheSize>5000000000</maxCacheSize>
-        <cacheProviderDir>/artifactory-data/cache</cacheProviderDir>
     </provider>
     <provider id="s3-storage-v3" type="s3-storage-v3">
         <bucketName>${s3_bucket_name}</bucketName>

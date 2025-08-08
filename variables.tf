@@ -14,7 +14,7 @@ variable "additional_tags" {
 variable "instance_type" {
   description = "EC2 instance type"
   type        = string
-  default     = "t3.micro" // Change this to your required instance type
+  default     = "t3.medium" // Change this to your required instance type
 }
 
 variable "key_name" {
